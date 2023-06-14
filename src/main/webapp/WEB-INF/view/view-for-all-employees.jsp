@@ -1,3 +1,5 @@
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Igor
@@ -13,9 +15,13 @@
 <body>
 <h2>Страница для всех сотрудников</h2>
 
+<security:authorize access="hasRole('HR')">
 <input type="button" value="Оклад" onclick="window.location.href='hr_info'"/> Только для сотрудников HR<br><br>
-<input type="button" value="Производительность" onclick="window.location.href='managers_info'"/> Только для менеджеров<br><br>
+</security:authorize>
 
+<security:authorize access="hasRole('MANAGER')">
+<input type="button" value="Производительность" onclick="window.location.href='managers_info'"/> Только для менеджеров<br><br>
+</security:authorize>
 
 
 </body>

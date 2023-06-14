@@ -18,12 +18,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser(userBuilder.username("Andrew").password("AndrewPwd").roles("MANAGER", "HR"));
     }
 
-   /* @Override
+   @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").hasAnyRole("EMPLOYEE", "MANAGER", "HR")
                 .antMatchers("/hr_info").hasRole("HR")
                 .antMatchers("/managers_info/**").hasRole("MANAGER")
-                .and().formLogin().permitAll();
-    }*/
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .and().logout()
+                .permitAll();
+    }
 }
